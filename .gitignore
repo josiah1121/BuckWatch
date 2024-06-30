@@ -1,0 +1,11 @@
+# Ignore Xcode specific files
+.DS_Store
+build/
+DerivedData/
+xcuserdata/
+
+# Ignore Pods directory
+Pods/
+
+# Ignore Config.plist file
+Config.plist
