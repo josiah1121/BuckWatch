@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_BuckWatchApplication_BuckWatchApplicationUITests : NSObject
+@end
+@implementation PodsDummy_Pods_BuckWatchApplication_BuckWatchApplicationUITests
+@end

@@ -1,0 +1,6 @@
+framework module Pods_BuckWatchApplicationTests {
+  umbrella header "Pods-BuckWatchApplicationTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,762 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		57746E3D87C877F41002EBD0 /* Pods_BuckWatchApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38345AA62954B7C85D39F694 /* Pods_BuckWatchApplication.framework */; };
+		583BF59A2C30F0AF006E8D74 /* BuckWatchApplicationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5992C30F0AF006E8D74 /* BuckWatchApplicationApp.swift */; };
+		583BF59C2C30F0AF006E8D74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF59B2C30F0AF006E8D74 /* ContentView.swift */; };
+		583BF59E2C30F0B0006E8D74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 583BF59D2C30F0B0006E8D74 /* Assets.xcassets */; };
+		583BF5A12C30F0B0006E8D74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 583BF5A02C30F0B0006E8D74 /* Preview Assets.xcassets */; };
+		583BF5AB2C30F0B0006E8D74 /* BuckWatchApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5AA2C30F0B0006E8D74 /* BuckWatchApplicationTests.swift */; };
+		583BF5B52C30F0B0006E8D74 /* BuckWatchApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5B42C30F0B0006E8D74 /* BuckWatchApplicationUITests.swift */; };
+		583BF5B72C30F0B0006E8D74 /* BuckWatchApplicationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5B62C30F0B0006E8D74 /* BuckWatchApplicationUITestsLaunchTests.swift */; };
+		583BF5C42C30F0EE006E8D74 /* DatabaseSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5C32C30F0EE006E8D74 /* DatabaseSchema.swift */; };
+		583BF5C62C30F102006E8D74 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5C52C30F102006E8D74 /* MapView.swift */; };
+		583BF5C82C30F119006E8D74 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BF5C72C30F119006E8D74 /* KeychainHelper.swift */; };
+		6C7A7BF3DB55415F49443517 /* Pods_BuckWatchApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A395E7529A64E5F9030AECB5 /* Pods_BuckWatchApplicationTests.framework */; };
+		C760464BEF4E83E2ECDF974D /* Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CECDD7653EA21820D21DFEE /* Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		583BF5A72C30F0B0006E8D74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 583BF58E2C30F0AF006E8D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 583BF5952C30F0AF006E8D74;
+			remoteInfo = BuckWatchApplication;
+		};
+		583BF5B12C30F0B0006E8D74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 583BF58E2C30F0AF006E8D74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 583BF5952C30F0AF006E8D74;
+			remoteInfo = BuckWatchApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		38345AA62954B7C85D39F694 /* Pods_BuckWatchApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuckWatchApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50CDCA9EC58C3F36665B3770 /* Pods-BuckWatchApplicationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplicationTests.release.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplicationTests/Pods-BuckWatchApplicationTests.release.xcconfig"; sourceTree = "<group>"; };
+		583BF5962C30F0AF006E8D74 /* BuckWatchApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuckWatchApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		583BF5992C30F0AF006E8D74 /* BuckWatchApplicationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckWatchApplicationApp.swift; sourceTree = "<group>"; };
+		583BF59B2C30F0AF006E8D74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		583BF59D2C30F0B0006E8D74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		583BF5A02C30F0B0006E8D74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		583BF5A62C30F0B0006E8D74 /* BuckWatchApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuckWatchApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		583BF5AA2C30F0B0006E8D74 /* BuckWatchApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckWatchApplicationTests.swift; sourceTree = "<group>"; };
+		583BF5B02C30F0B0006E8D74 /* BuckWatchApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuckWatchApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		583BF5B42C30F0B0006E8D74 /* BuckWatchApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckWatchApplicationUITests.swift; sourceTree = "<group>"; };
+		583BF5B62C30F0B0006E8D74 /* BuckWatchApplicationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckWatchApplicationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		583BF5C32C30F0EE006E8D74 /* DatabaseSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchema.swift; sourceTree = "<group>"; };
+		583BF5C52C30F102006E8D74 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		583BF5C72C30F119006E8D74 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		5CECDD7653EA21820D21DFEE /* Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CF4253C4CE78FF3C3803B43 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplication-BuckWatchApplicationUITests.release.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplication-BuckWatchApplicationUITests/Pods-BuckWatchApplication-BuckWatchApplicationUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A395E7529A64E5F9030AECB5 /* Pods_BuckWatchApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuckWatchApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA11F70CF29A58280784CFB2 /* Pods-BuckWatchApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplication.debug.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplication/Pods-BuckWatchApplication.debug.xcconfig"; sourceTree = "<group>"; };
+		BF90AEBFBE4E272309B77FD7 /* Pods-BuckWatchApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplication.release.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplication/Pods-BuckWatchApplication.release.xcconfig"; sourceTree = "<group>"; };
+		C096DA901AC0922068FACE24 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplication-BuckWatchApplicationUITests.debug.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplication-BuckWatchApplicationUITests/Pods-BuckWatchApplication-BuckWatchApplicationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CF250AE3495D3BD77543FCEA /* Pods-BuckWatchApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuckWatchApplicationTests.debug.xcconfig"; path = "Target Support Files/Pods-BuckWatchApplicationTests/Pods-BuckWatchApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		583BF5932C30F0AF006E8D74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57746E3D87C877F41002EBD0 /* Pods_BuckWatchApplication.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5A32C30F0B0006E8D74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C7A7BF3DB55415F49443517 /* Pods_BuckWatchApplicationTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5AD2C30F0B0006E8D74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C760464BEF4E83E2ECDF974D /* Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FE17A3F3BE36839DCDDD6CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA11F70CF29A58280784CFB2 /* Pods-BuckWatchApplication.debug.xcconfig */,
+				BF90AEBFBE4E272309B77FD7 /* Pods-BuckWatchApplication.release.xcconfig */,
+				C096DA901AC0922068FACE24 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.debug.xcconfig */,
+				6CF4253C4CE78FF3C3803B43 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.release.xcconfig */,
+				CF250AE3495D3BD77543FCEA /* Pods-BuckWatchApplicationTests.debug.xcconfig */,
+				50CDCA9EC58C3F36665B3770 /* Pods-BuckWatchApplicationTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		583BF58D2C30F0AF006E8D74 = {
+			isa = PBXGroup;
+			children = (
+				583BF5982C30F0AF006E8D74 /* BuckWatchApplication */,
+				583BF5A92C30F0B0006E8D74 /* BuckWatchApplicationTests */,
+				583BF5B32C30F0B0006E8D74 /* BuckWatchApplicationUITests */,
+				583BF5972C30F0AF006E8D74 /* Products */,
+				3FE17A3F3BE36839DCDDD6CA /* Pods */,
+				5ED677254D17586B97076384 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		583BF5972C30F0AF006E8D74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				583BF5962C30F0AF006E8D74 /* BuckWatchApplication.app */,
+				583BF5A62C30F0B0006E8D74 /* BuckWatchApplicationTests.xctest */,
+				583BF5B02C30F0B0006E8D74 /* BuckWatchApplicationUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		583BF5982C30F0AF006E8D74 /* BuckWatchApplication */ = {
+			isa = PBXGroup;
+			children = (
+				583BF5992C30F0AF006E8D74 /* BuckWatchApplicationApp.swift */,
+				583BF59B2C30F0AF006E8D74 /* ContentView.swift */,
+				583BF5C32C30F0EE006E8D74 /* DatabaseSchema.swift */,
+				583BF5C52C30F102006E8D74 /* MapView.swift */,
+				583BF5C72C30F119006E8D74 /* KeychainHelper.swift */,
+				583BF59D2C30F0B0006E8D74 /* Assets.xcassets */,
+				583BF59F2C30F0B0006E8D74 /* Preview Content */,
+			);
+			path = BuckWatchApplication;
+			sourceTree = "<group>";
+		};
+		583BF59F2C30F0B0006E8D74 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				583BF5A02C30F0B0006E8D74 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		583BF5A92C30F0B0006E8D74 /* BuckWatchApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				583BF5AA2C30F0B0006E8D74 /* BuckWatchApplicationTests.swift */,
+			);
+			path = BuckWatchApplicationTests;
+			sourceTree = "<group>";
+		};
+		583BF5B32C30F0B0006E8D74 /* BuckWatchApplicationUITests */ = {
+			isa = PBXGroup;
+			children = (
+				583BF5B42C30F0B0006E8D74 /* BuckWatchApplicationUITests.swift */,
+				583BF5B62C30F0B0006E8D74 /* BuckWatchApplicationUITestsLaunchTests.swift */,
+			);
+			path = BuckWatchApplicationUITests;
+			sourceTree = "<group>";
+		};
+		5ED677254D17586B97076384 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38345AA62954B7C85D39F694 /* Pods_BuckWatchApplication.framework */,
+				5CECDD7653EA21820D21DFEE /* Pods_BuckWatchApplication_BuckWatchApplicationUITests.framework */,
+				A395E7529A64E5F9030AECB5 /* Pods_BuckWatchApplicationTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		583BF5952C30F0AF006E8D74 /* BuckWatchApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 583BF5BA2C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplication" */;
+			buildPhases = (
+				6A03AF615C80E831544BF4FD /* [CP] Check Pods Manifest.lock */,
+				583BF5922C30F0AF006E8D74 /* Sources */,
+				583BF5932C30F0AF006E8D74 /* Frameworks */,
+				583BF5942C30F0AF006E8D74 /* Resources */,
+				2E95240159C7C9DBF4A5EB59 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuckWatchApplication;
+			productName = BuckWatchApplication;
+			productReference = 583BF5962C30F0AF006E8D74 /* BuckWatchApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		583BF5A52C30F0B0006E8D74 /* BuckWatchApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 583BF5BD2C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplicationTests" */;
+			buildPhases = (
+				A9053D941A9F14B415B87D3F /* [CP] Check Pods Manifest.lock */,
+				583BF5A22C30F0B0006E8D74 /* Sources */,
+				583BF5A32C30F0B0006E8D74 /* Frameworks */,
+				583BF5A42C30F0B0006E8D74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				583BF5A82C30F0B0006E8D74 /* PBXTargetDependency */,
+			);
+			name = BuckWatchApplicationTests;
+			productName = BuckWatchApplicationTests;
+			productReference = 583BF5A62C30F0B0006E8D74 /* BuckWatchApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		583BF5AF2C30F0B0006E8D74 /* BuckWatchApplicationUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 583BF5C02C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplicationUITests" */;
+			buildPhases = (
+				3D7E4D4F42E5A16AAAA94A72 /* [CP] Check Pods Manifest.lock */,
+				583BF5AC2C30F0B0006E8D74 /* Sources */,
+				583BF5AD2C30F0B0006E8D74 /* Frameworks */,
+				583BF5AE2C30F0B0006E8D74 /* Resources */,
+				6FC775449DDC2FB3EF6854BC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				583BF5B22C30F0B0006E8D74 /* PBXTargetDependency */,
+			);
+			name = BuckWatchApplicationUITests;
+			productName = BuckWatchApplicationUITests;
+			productReference = 583BF5B02C30F0B0006E8D74 /* BuckWatchApplicationUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		583BF58E2C30F0AF006E8D74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					583BF5952C30F0AF006E8D74 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					583BF5A52C30F0B0006E8D74 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 583BF5952C30F0AF006E8D74;
+					};
+					583BF5AF2C30F0B0006E8D74 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 583BF5952C30F0AF006E8D74;
+					};
+				};
+			};
+			buildConfigurationList = 583BF5912C30F0AF006E8D74 /* Build configuration list for PBXProject "BuckWatchApplication" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 583BF58D2C30F0AF006E8D74;
+			productRefGroup = 583BF5972C30F0AF006E8D74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				583BF5952C30F0AF006E8D74 /* BuckWatchApplication */,
+				583BF5A52C30F0B0006E8D74 /* BuckWatchApplicationTests */,
+				583BF5AF2C30F0B0006E8D74 /* BuckWatchApplicationUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		583BF5942C30F0AF006E8D74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583BF5A12C30F0B0006E8D74 /* Preview Assets.xcassets in Resources */,
+				583BF59E2C30F0B0006E8D74 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5A42C30F0B0006E8D74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5AE2C30F0B0006E8D74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2E95240159C7C9DBF4A5EB59 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication/Pods-BuckWatchApplication-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication/Pods-BuckWatchApplication-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication/Pods-BuckWatchApplication-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D7E4D4F42E5A16AAAA94A72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuckWatchApplication-BuckWatchApplicationUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A03AF615C80E831544BF4FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuckWatchApplication-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FC775449DDC2FB3EF6854BC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication-BuckWatchApplicationUITests/Pods-BuckWatchApplication-BuckWatchApplicationUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication-BuckWatchApplicationUITests/Pods-BuckWatchApplication-BuckWatchApplicationUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BuckWatchApplication-BuckWatchApplicationUITests/Pods-BuckWatchApplication-BuckWatchApplicationUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9053D941A9F14B415B87D3F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuckWatchApplicationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		583BF5922C30F0AF006E8D74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583BF59C2C30F0AF006E8D74 /* ContentView.swift in Sources */,
+				583BF5C62C30F102006E8D74 /* MapView.swift in Sources */,
+				583BF59A2C30F0AF006E8D74 /* BuckWatchApplicationApp.swift in Sources */,
+				583BF5C82C30F119006E8D74 /* KeychainHelper.swift in Sources */,
+				583BF5C42C30F0EE006E8D74 /* DatabaseSchema.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5A22C30F0B0006E8D74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583BF5AB2C30F0B0006E8D74 /* BuckWatchApplicationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		583BF5AC2C30F0B0006E8D74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583BF5B72C30F0B0006E8D74 /* BuckWatchApplicationUITestsLaunchTests.swift in Sources */,
+				583BF5B52C30F0B0006E8D74 /* BuckWatchApplicationUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		583BF5A82C30F0B0006E8D74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 583BF5952C30F0AF006E8D74 /* BuckWatchApplication */;
+			targetProxy = 583BF5A72C30F0B0006E8D74 /* PBXContainerItemProxy */;
+		};
+		583BF5B22C30F0B0006E8D74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 583BF5952C30F0AF006E8D74 /* BuckWatchApplication */;
+			targetProxy = 583BF5B12C30F0B0006E8D74 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		583BF5B82C30F0B0006E8D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		583BF5B92C30F0B0006E8D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		583BF5BB2C30F0B0006E8D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA11F70CF29A58280784CFB2 /* Pods-BuckWatchApplication.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BuckWatchApplication/Preview Content\"";
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		583BF5BC2C30F0B0006E8D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF90AEBFBE4E272309B77FD7 /* Pods-BuckWatchApplication.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"BuckWatchApplication/Preview Content\"";
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		583BF5BE2C30F0B0006E8D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF250AE3495D3BD77543FCEA /* Pods-BuckWatchApplicationTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuckWatchApplication.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BuckWatchApplication";
+			};
+			name = Debug;
+		};
+		583BF5BF2C30F0B0006E8D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50CDCA9EC58C3F36665B3770 /* Pods-BuckWatchApplicationTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplicationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuckWatchApplication.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BuckWatchApplication";
+			};
+			name = Release;
+		};
+		583BF5C12C30F0B0006E8D74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C096DA901AC0922068FACE24 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplicationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BuckWatchApplication;
+			};
+			name = Debug;
+		};
+		583BF5C22C30F0B0006E8D74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CF4253C4CE78FF3C3803B43 /* Pods-BuckWatchApplication-BuckWatchApplicationUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B4P6DS68R;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yippy.BuckWatchApplicationUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BuckWatchApplication;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		583BF5912C30F0AF006E8D74 /* Build configuration list for PBXProject "BuckWatchApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				583BF5B82C30F0B0006E8D74 /* Debug */,
+				583BF5B92C30F0B0006E8D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		583BF5BA2C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				583BF5BB2C30F0B0006E8D74 /* Debug */,
+				583BF5BC2C30F0B0006E8D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		583BF5BD2C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				583BF5BE2C30F0B0006E8D74 /* Debug */,
+				583BF5BF2C30F0B0006E8D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		583BF5C02C30F0B0006E8D74 /* Build configuration list for PBXNativeTarget "BuckWatchApplicationUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				583BF5C12C30F0B0006E8D74 /* Debug */,
+				583BF5C22C30F0B0006E8D74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 583BF58E2C30F0AF006E8D74 /* Project object */;
+}
