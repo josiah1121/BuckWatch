@@ -8,7 +8,7 @@
 import Foundation
 
 
-var apiKey: String = ""
+var weatherApiKey: String = ""
 
 struct WeatherData: Codable {
     let lat: Double
@@ -43,6 +43,7 @@ struct WeatherDetail: Codable {
     let windGust: Double?
     let weather: [Weather]
     let moonPhase: Double?
+    let precipitation: Double?
 
     enum CodingKeys: String, CodingKey {
         case dt
@@ -61,9 +62,9 @@ struct WeatherDetail: Codable {
         case windGust = "wind_gust"
         case weather
         case moonPhase = "moon_phase"
+        case precipitation = "rain"
     }
 }
-
 
 struct Weather: Codable {
     let id: Int
@@ -75,7 +76,7 @@ struct Weather: Codable {
 
 func fetchWeatherData(latitude: Double, longitude: Double, dateTime: Date, completion: @escaping (WeatherData?) -> Void) {
     let dateTimeString = Int(dateTime.timeIntervalSince1970)
-    let urlString = "https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=\(latitude)&lon=\(longitude)&dt=\(dateTimeString)&appid=\(apiKey)&units=imperial"
+    let urlString = "https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=\(latitude)&lon=\(longitude)&dt=\(dateTimeString)&appid=\(weatherApiKey)&units=imperial"
     guard let url = URL(string: urlString) else {
         print("Invalid URL: \(urlString)")
         completion(nil)
@@ -88,17 +89,17 @@ func fetchWeatherData(latitude: Double, longitude: Double, dateTime: Date, compl
             completion(nil)
             return
         }
-        
+
         guard let data = data else {
             print("No data received")
             completion(nil)
             return
         }
-        
+
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: [])
             print("Received JSON: \(json)")
-            
+
             let weatherData = try JSONDecoder().decode(WeatherData.self, from: data)
             completion(weatherData)
         } catch {
@@ -107,7 +108,6 @@ func fetchWeatherData(latitude: Double, longitude: Double, dateTime: Date, compl
             completion(nil)
         }
     }
-    
+
     task.resume()
 }
-

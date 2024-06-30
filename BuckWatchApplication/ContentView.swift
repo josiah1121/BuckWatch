@@ -26,6 +26,7 @@ struct ImageUploadView: View {
     @State private var imageName: String = ""
     @State private var animalType: String = "Doe"
     @State private var date = Date()
+    @State private var stringDate: String = ""
     @State private var time = Date()
     @State private var trailCamera: String = ""
     @State private var showingImagePicker = false
@@ -140,8 +141,13 @@ struct ImageUploadView: View {
     private func loadApiKey() {
         if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
            let config = NSDictionary(contentsOfFile: path),
-           let key = config["API_KEY"] as? String {
-            apiKey = key
+           let key = config["WEATHER_API_KEY"] as? String {
+            weatherApiKey = key
+        }
+        if let path2 = Bundle.main.path(forResource: "Config", ofType: "plist"),
+           let config2 = NSDictionary(contentsOfFile: path2),
+           let key2 = config2["MOON_API_KEY"] as? String {
+            moonApiKey = key2
         }
     }
 
@@ -158,51 +164,80 @@ struct ImageUploadView: View {
         guard let image = selectedImage else { return }
         let imageData = image.jpegData(compressionQuality: 1.0)
         let dateTime = Calendar.current.date(bySettingHour: Calendar.current.component(.hour, from: time),
-            minute: Calendar.current.component(.minute, from: time),
-            second: 0, of: date)!
+                                             minute: Calendar.current.component(.minute, from: time),
+                                             second: 0, of: date)!
         
         let realm = try! Realm()
-            guard let selectedCamera = realm.objects(Camera.self).filter("name == %@", trailCamera).first else {
-                print("Camera not found")
-                return
-            }
-
+        guard let selectedCamera = realm.objects(Camera.self).filter("name == %@", trailCamera).first else {
+            print("Camera not found")
+            return
+        }
+        
         fetchWeatherData(latitude: selectedCamera.latitude, longitude: selectedCamera.longitude, dateTime: dateTime) { weatherData in
-            if let weatherData = weatherData {
-                // Assuming you want to print the first item in the `data` array for demonstration purposes
-                if let firstWeatherDetail = weatherData.data.first {
-                    print("Weather Data for \(self.formattedDate(self.date)) at \(self.formattedTime(self.time)):")
-                    print("Temperature: \(firstWeatherDetail.temp)°F")
-                    print("Feels Like: \(firstWeatherDetail.feelsLike)°F")
-                    print("Wind Speed: \(firstWeatherDetail.windSpeed) mph")
-                    print("Moon Phase: \(firstWeatherDetail.moonPhase ?? 0)")
-                    print("Weather Description: \(firstWeatherDetail.weather.first?.description ?? "N/A")")
-                } else {
-                    print("No weather details available")
-                }
-            } else {
-                print("Failed to fetch weather data")
-            }
             DispatchQueue.main.async {
-                let imageDataObject = ImageData()
-                imageDataObject.imageName = self.imageName
-                imageDataObject.imageData = imageData
-                imageDataObject.animalType = self.animalType
-                imageDataObject.date = self.date
-                imageDataObject.time = self.time
-                imageDataObject.trailCamera = self.trailCamera
-                do {
-                    try realm.write {
-                        realm.add(imageDataObject)
+                if let weatherData = weatherData {
+                    // Assuming you want to print the first item in the `data` array for demonstration purposes
+                    if let firstWeatherDetail = weatherData.data.first {
+                        print("Weather Data for \(self.formattedDate(self.date)) at \(self.formattedTime(self.time)):")
+                        print("Temperature: \(firstWeatherDetail.temp)°F")
+                        print("Feels Like: \(firstWeatherDetail.feelsLike)°F")
+                        print("Wind Speed: \(firstWeatherDetail.windSpeed) mph")
+                        print("Wind Direction: \(windDirection(degrees: firstWeatherDetail.windDeg))")
+                                print("Precipitation: \(firstWeatherDetail.precipitation ?? 0) mm")
+                        print("Weather Description: \(firstWeatherDetail.weather.first?.description ?? "N/A")")
+                    } else {
+                        print("No weather details available")
                     }
-                    print("Image data saved to Realm successfully")
-                } catch {
-                    print("Failed to write to Realm: \(error.localizedDescription)")
+                } else {
+                    print("Failed to fetch weather data")
+                }
+                
+                let stringDate = formatDateToString(date: dateTime)
+                fetchMoonPhase(latitude: selectedCamera.latitude, longitude: selectedCamera.longitude, date: stringDate) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let moonPhase):
+                            // Process and combine weather data with moon phase data
+                            print("Moon Phase: \(moonPhase)")
+                        case .failure(let error):
+                            print("Failed to fetch moon phase data: \(error.localizedDescription)")
+                        }
+                        
+                        // Save to Realm on the main thread
+                        let realm = try! Realm()
+                        let imageDataObject = ImageData()
+                        imageDataObject.imageName = self.imageName
+                        imageDataObject.imageData = imageData
+                        imageDataObject.animalType = self.animalType
+                        imageDataObject.date = self.date
+                        imageDataObject.time = self.time
+                        imageDataObject.trailCamera = self.trailCamera
+                        do {
+                            try realm.write {
+                                realm.add(imageDataObject)
+                            }
+                            print("Image data saved to Realm successfully")
+                        } catch {
+                            print("Failed to write to Realm: \(error.localizedDescription)")
+                        }
+                    }
                 }
             }
         }
     }
-
+    
+    private func windDirection(degrees: Int) -> String {
+        let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"]
+        let index = Int((Double(degrees) / 22.5).rounded()) % 16
+        return directions[index]
+    }
+    
+    private func formatDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
+    
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
