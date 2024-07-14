@@ -378,7 +378,6 @@ struct ImageTabView: View {
                             .onTapGesture {
                                 fullScreenImage = uiImage
                                 showFullScreenImage.toggle()
-                                print("slaygit ")
                             }
                     } else {
                         Text("No Image Available")
