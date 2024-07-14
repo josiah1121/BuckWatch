@@ -47,8 +47,8 @@ struct WeatherDetail: Codable {
 
     enum CodingKeys: String, CodingKey {
         case dt
-        case sunrise
-        case sunset
+        case sunrise = "sunrise"
+        case sunset = "sunset"
         case temp
         case feelsLike = "feels_like"
         case pressure

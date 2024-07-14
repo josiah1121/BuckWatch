@@ -11,67 +11,271 @@ import MapKit
 import SceneKit
 
 
-struct ContentView: View {
+struct DashboardView: View {
+    @ObservedObject var imageDataStore: ImageDataStore
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 20) {
+            // Dashboard Title
+            Text("Wildlife Photo Stats")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.top, 20)
+            
+            // Total Images Taken
+            HStack {
+                Image(systemName: "photo.on.rectangle")
+                    .foregroundColor(.blue)
+                    .font(.title)
+                Text("Total Images Taken:")
+                    .font(.headline)
+                Spacer()
+                Text("\(imageDataStore.totalImages)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
+            }
+            .padding(.horizontal)
+            
+            Divider()
+            
+            // Different Animal Types
+            HStack {
+                Image(systemName: "pawprint.fill")
+                    .foregroundColor(.green)
+                    .font(.title)
+                Text("Different Animal Types:")
+                    .font(.headline)
+                Spacer()
+                Text("\(imageDataStore.differentAnimalTypes.count)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.green)
+            }
+            .padding(.horizontal)
+            
+            Divider()
+            
+            // Average Temperature
+            HStack {
+                Image(systemName: "thermometer")
+                    .foregroundColor(.red)
+                    .font(.title)
+                Text("Average Temperature:")
+                    .font(.headline)
+                Spacer()
+                Text(String(format: "%.2f °F", imageDataStore.averageTemperature))
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.red)
+            }
+            .padding(.horizontal)
+            
+            Divider()
+            
+            // Average Feels Like
+            HStack {
+                Image(systemName: "sun.max.fill")
+                    .foregroundColor(.orange)
+                    .font(.title)
+                Text("Average Feels Like:")
+                    .font(.headline)
+                Spacer()
+                Text(String(format: "%.2f °F", imageDataStore.averageFeelsLike))
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.orange)
+            }
+            .padding(.horizontal)
+            
+            Spacer()
         }
+        .background(Color(UIColor.systemGroupedBackground))
+        .cornerRadius(15)
+        .shadow(radius: 5)
         .padding()
+        .navigationTitle("Dashboard")
     }
 }
 
+struct DashboardView2: View {
+    @ObservedObject var imageDataStore: ImageDataStore
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            // Weather Information
+            HStack {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image(systemName: "cloud.rain.fill")
+                            .foregroundColor(.blue)
+                        Text("Temp")
+                        Spacer()
+                        Text("95°F")
+                            .fontWeight(.bold)
+                    }
+                    HStack {
+                        Image(systemName: "drop.fill")
+                            .foregroundColor(.blue)
+                        Text("Precip.")
+                        Spacer()
+                        Text("17%")
+                            .fontWeight(.bold)
+                    }
+                    HStack {
+                        Image(systemName: "sunrise.fill")
+                            .foregroundColor(.yellow)
+                        Text("Sunrise")
+                        Spacer()
+                        Text("5:24 AM")
+                            .fontWeight(.bold)
+                    }
+                    HStack {
+                        Image(systemName: "sunset.fill")
+                            .foregroundColor(.orange)
+                        Text("Sunset")
+                        Spacer()
+                        Text("7:33 PM")
+                            .fontWeight(.bold)
+                    }
+                }
+                .padding()
+            }
+            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            .padding(.horizontal)
+            
+            Spacer()
+        }
+    }
+}
+
+
+
 struct ImageUploadView: View {
+    @StateObject private var imageDataStore = ImageDataStore()
     @State private var selectedImage: UIImage?
     @State private var showingImagePicker = false
     @State private var showAlert = false
     @State private var showPopup = false
-    
+    @State private var currentAnimal: ImageData?
+    @State private var currentIndex = 0
+    @State private var uniqueAnimals: [ImageData] = []
+    @State private var animalsByCurrentName: [ImageData] = []
+    @State private var selectedTab = "Image"
+    @State private var mapRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+    @State private var mapPins: [IdentifiablePointAnnotation] = []
+    @State private var mapPins2: [IdentifiablePointAnnotation3] = []
+    @State private var selectedCamera: Camera?
+
     var body: some View {
         NavigationView {
-            ZStack{
+            ZStack {
                 VStack {
-                    Image(systemName: "globe")
-                        .imageScale(.large)
-                        .foregroundStyle(.tint)
-                    Text("Hello, world!")
+                    HStack {
+                        Image("Antlers")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text(currentAnimal?.imageName ?? "Loading...")
+                                .font(.system(size: 20, weight: .bold))
+                                .fontWeight(.bold)
+                            HStack {
+                                Text("Image")
+                                    .onTapGesture {
+                                        selectedTab = "Image"
+                                    }
+                                    .font(.headline)
+                                    .foregroundColor(selectedTab == "Image" ? .blue : .primary)
+                                Spacer()
+                                Text("Location")
+                                    .onTapGesture {
+                                        selectedTab = "Location"
+                                    }
+                                    .font(.headline)
+                                    .foregroundColor(selectedTab == "Location" ? .blue : .primary)
+                                Spacer()
+                                Text("Harvest")
+                                    .onTapGesture {
+                                        selectedTab = "Harvest"
+                                    }
+                                    .font(.headline)
+                                    .foregroundColor(selectedTab == "Harvest" ? .blue : .primary)
+                            }
+                        }
+                        Spacer()
+                        Menu {
+                            ForEach(uniqueAnimals.indices, id: \.self) { index in
+                                Button(action: {
+                                    updateViewWithAnimal(at: index)
+                                }) {
+                                    Text(uniqueAnimals[index].imageName)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "line.horizontal.3.decrease.circle.fill")
+                                .imageScale(.large)
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 20)
+
+                    if selectedTab == "Image" {
+                        ImageTabView(currentIndex: $currentIndex, animalsByCurrentName: $animalsByCurrentName, currentAnimal: $currentAnimal)
+                    } else if selectedTab == "Location" {
+                        LocationTabView(currentAnimal: $currentAnimal, mapRegion: $mapRegion, mapPins: $mapPins2, selectedCamera: $selectedCamera)
+                    } else if selectedTab == "Harvest" {
+                        Text("Harvest Information")
+                            .padding()
+                            // Add your Harvest tab content here
+                    }
+
+                    Spacer()
                 }
+
                 if showPopup {
                     PopupView(showPopup: $showPopup)
                         .transition(.move(edge: .bottom))
                 }
             }
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(15)
+            .shadow(radius: 5)
             .padding()
             .navigationTitle("Dashboard")
             .navigationBarItems(trailing:
-                Menu {
-                    Button(action: {
-                        // Handle Add New Image action
-                        withAnimation {
-                            showPopup.toggle()
+                HStack {
+                    Menu {
+                        Button(action: {
+                            withAnimation {
+                                showPopup.toggle()
+                            }
+                        }) {
+                            Label("Add New Image", systemImage: "photo")
                         }
-                    }) {
-                        Label("Add New Image", systemImage: "photo")
-                    }
 
-                    Button(action: {
-                        // Handle Take Picture action
-                        showAlert = true
-                    }) {
-                        Label("Take Picture", systemImage: "camera")
-                    }
+                        Button(action: {
+                            showAlert = true
+                        }) {
+                            Label("Take Picture", systemImage: "camera")
+                        }
 
-                    Button(action: {
-                        // Handle Add New Trail Camera Location action
-                    }) {
-                        Label("Add New Trail Camera Location", systemImage: "location")
+                        Button(action: {
+                            // Handle Add New Trail Camera Location action
+                        }) {
+                            Label("Add New Trail Camera Location", systemImage: "location")
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                            .foregroundColor(.blue)
                     }
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                        .foregroundColor(.blue)
                 }
             )
             .sheet(isPresented: $showingImagePicker) {
@@ -88,12 +292,14 @@ struct ImageUploadView: View {
                 )
             }
         }
-        .padding()
         .onAppear {
             loadApiKey()
+            printRealmDatabasePath()
+            loadUniqueAnimals()
+            loadPinsFromRealm()
         }
     }
-    
+
     private func loadApiKey() {
         if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
            let config = NSDictionary(contentsOfFile: path),
@@ -106,8 +312,189 @@ struct ImageUploadView: View {
             moonApiKey = key2
         }
     }
+
+    private func printRealmDatabasePath() {
+        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+            print("Realm database file path: \(fileURL.path)")
+        } else {
+            print("Could not find Realm database file path.")
+        }
+    }
+
+    private func loadUniqueAnimals() {
+        let realm = try! Realm()
+        let distinctAnimals = realm.objects(ImageData.self).distinct(by: ["imageName"])
+        uniqueAnimals = Array(distinctAnimals)
+        if !uniqueAnimals.isEmpty {
+            updateViewWithAnimal(at: 0)
+        } else {
+            currentAnimal = nil
+        }
+    }
+
+    private func updateViewWithAnimal(at index: Int) {
+        currentAnimal = uniqueAnimals[index]
+        loadAnimalsByCurrentName()
+        currentIndex = 0
+    }
+
+    private func loadAnimalsByCurrentName() {
+        guard let currentImageName = currentAnimal?.imageName else { return }
+        let realm = try! Realm()
+        animalsByCurrentName = Array(realm.objects(ImageData.self).filter("imageName == %@", currentImageName))
+    }
+
+    private func loadPinsFromRealm() {
+        let realm = try! Realm()
+        let cameras = realm.objects(Camera.self)
+        for camera in cameras {
+            let newPin = MKPointAnnotation()
+            newPin.coordinate = CLLocationCoordinate2D(latitude: camera.latitude, longitude: camera.longitude)
+            newPin.title = camera.name
+            let identifiablePin = IdentifiablePointAnnotation(annotation: newPin)
+            mapPins.append(identifiablePin)
+        }
+    }
 }
 
+struct ImageTabView: View {
+    @Binding var currentIndex: Int
+    @Binding var animalsByCurrentName: [ImageData]
+    @Binding var currentAnimal: ImageData?
+
+    @State private var showFullScreenImage = false
+    @State private var fullScreenImage: UIImage?
+
+    var body: some View {
+        TabView(selection: $currentIndex) {
+            ForEach(animalsByCurrentName.indices, id: \.self) { index in
+                VStack {
+                    if let imageData = animalsByCurrentName[index].imageData, let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 200)
+                            .padding()
+                            .onTapGesture {
+                                fullScreenImage = uiImage
+                                showFullScreenImage.toggle()
+                            }
+                    } else {
+                        Text("No Image Available")
+                            .padding()
+                    }
+
+                    VStack {
+                        HStack(alignment: .center) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                InfoRow(icon: "thermometer.high", iconColor: .red, label: "Temp", value: animalsByCurrentName[index].temperature)
+                                InfoRow(icon: "cloud.rain.fill", iconColor: .blue, label: "Precip.", value: animalsByCurrentName[index].precipitation)
+                                InfoRow(icon: "sunrise.fill", iconColor: .yellow, label: "Sunrise", value: animalsByCurrentName[index].sunrise)
+                                InfoRow(icon: "sunset.fill", iconColor: .orange, label: "Sunset", value: animalsByCurrentName[index].sunset)
+                                InfoRow(icon: "wind", iconColor: .green, label: "Wind", value: animalsByCurrentName[index].wind)
+                                InfoRow(icon: "moonphase.waxing.gibbous.inverse", iconColor: .gray, label: "Moon", value: animalsByCurrentName[index].moonPhase)
+                                InfoRow(icon: "clock.circle.fill", iconColor: .black, label: "Time", value: formattedTime(from: animalsByCurrentName[index].time))
+                                InfoRow(icon: "calendar.circle.fill", iconColor: .blue, label: "Date", value: formattedDate(from: animalsByCurrentName[index].date))
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                    }
+                }
+                .tag(index)
+            }
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+        .onChange(of: currentIndex) { newIndex in
+            currentAnimal = animalsByCurrentName[newIndex]
+        }
+        .fullScreenCover(isPresented: $showFullScreenImage) {
+            FullScreenImageView(image: $fullScreenImage, isPresented: $showFullScreenImage)
+        }
+    }
+
+    private func formattedDate(from date: Date?) -> String {
+        guard let date = date else { return "N/A" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: date)
+    }
+
+    private func formattedTime(from time: Date?) -> String {
+        guard let time = time else { return "N/A" }
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = .short
+        return timeFormatter.string(from: time)
+    }
+}
+
+struct FullScreenImageView: View {
+    @Binding var image: UIImage?
+    @Binding var isPresented: Bool
+
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            Color.black.edgesIgnoringSafeArea(.all)
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                Text("No Image Available")
+                    .foregroundColor(.white)
+            }
+            Button(action: {
+                isPresented.toggle()
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .padding()
+            }
+        }
+    }
+}
+
+
+struct LocationTabView: View {
+    @Binding var currentAnimal: ImageData?
+    @Binding var mapRegion: MKCoordinateRegion
+    @Binding var mapPins: [IdentifiablePointAnnotation3]
+    @Binding var selectedCamera: Camera?
+
+    var body: some View {
+        VStack {
+            if let currentAnimal = currentAnimal, let camera = findCamera(by: currentAnimal.trailCamera) {
+                MapView3(region: $mapRegion, pins: $mapPins, selectedCamera: $selectedCamera)
+                    .onAppear {
+                        let cameraLocation = CLLocationCoordinate2D(latitude: camera.latitude, longitude: camera.longitude)
+                        mapRegion = MKCoordinateRegion(
+                            center: cameraLocation,
+                            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                        )
+                        addCameraPin(location: cameraLocation, name: camera.name)
+                    }
+            } else {
+                Text("Location information not available.")
+                    .padding()
+            }
+        }
+    }
+
+    private func findCamera(by name: String) -> Camera? {
+        let realm = try! Realm()
+        return realm.objects(Camera.self).filter("name == %@", name).first
+    }
+
+    private func addCameraPin(location: CLLocationCoordinate2D, name: String) {
+        let cameraAnnotation = MKPointAnnotation()
+        cameraAnnotation.coordinate = location
+        cameraAnnotation.title = name
+        let identifiablePin = IdentifiablePointAnnotation3(annotation: cameraAnnotation)
+        mapPins = [identifiablePin]  // Replace existing pins with the new camera pin
+    }
+}
 struct ImageUploadView_Previews: PreviewProvider {
     static var previews: some View {
         ImageUploadView()
@@ -187,26 +574,47 @@ struct ImageListView: View {
 
 class ImageDataStore: ObservableObject {
     @Published var images: [ImageData] = []
+    @Published var totalImages: Int = 0
+    @Published var differentAnimalTypes: Set<String> = []
+    @Published var averageTemperature: Double = 0.0
+    @Published var averageFeelsLike: Double = 0.0
+
     private var realm: Realm
 
     init() {
         realm = try! Realm()
-        fetchImages()
-        printRealmDatabasePath()
+        fetchData()
     }
 
-    private func fetchImages() {
+    func fetchData() {
         let results = realm.objects(ImageData.self)
         images = Array(results)
+
+        totalImages = images.count
+        differentAnimalTypes = Set(images.map { $0.animalType })
+        averageTemperature = calculateAverageTemperature()
+        averageFeelsLike = calculateAverageFeelsLike()
     }
-    
-    private func printRealmDatabasePath() {
-           if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-               print("Realm database file path: \(fileURL.path)")
-           } else {
-               print("Could not find Realm database file path.")
-           }
-       }
+
+    private func calculateAverageTemperature() -> Double {
+        let temperatures = images.compactMap { Double($0.temperature) }
+        guard !temperatures.isEmpty else { return 0.0 }
+        return temperatures.reduce(0, +) / Double(temperatures.count)
+    }
+
+    private func calculateAverageFeelsLike() -> Double {
+        let feelsLikeTemperatures = images.compactMap { Double($0.feelsLike) }
+        guard !feelsLikeTemperatures.isEmpty else { return 0.0 }
+        return feelsLikeTemperatures.reduce(0, +) / Double(feelsLikeTemperatures.count)
+    }
+
+    func printRealmDatabasePath() {
+        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+            print("Realm database file path: \(fileURL.path)")
+        } else {
+            print("Could not find Realm database file path.")
+        }
+    }
 }
 
 struct ImageListView_Previews: PreviewProvider {
@@ -242,7 +650,32 @@ struct PopupView: View {
     @State private var stringDate: String = ""
     @State private var time = Date()
     @State private var trailCamera: String = ""
+    @State private var temperature: String = ""
+    @State private var feelsLike: String = ""
+    @State private var sunrise: String = ""
+    @State private var sunset: String = ""
+    @State private var wind: String = ""
+    @State private var windDirection: Int = 0
+    @State private var weatherDescription: String = ""
+    @State private var currentMoonPhase: String = ""
+    @State private var precipitation: String = ""
+    @State private var buckSize: String = ""
     @State private var trailCameras: [String] = []
+    @State private var selectedLocation: CLLocationCoordinate2D?
+
+    // Map-related states
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    )
+    @State private var pins: [IdentifiablePointAnnotation] = []
+    @State private var showingCameraNamePopup = false
+    @State private var showingCameraInfoPopup = false
+    @State private var cameraName = ""
+    @State private var lastPin: MKPointAnnotation?
+    @State private var mapType: MKMapType = .standard
+    @State private var selectedCameraInfo: CameraInfo?
+    @State private var selectedCameraFeedback: String = ""
 
     let questions: [Question] = [
         Question(text: "Upload an image"),
@@ -250,6 +683,7 @@ struct PopupView: View {
         Question(text: "Animal Name"),
         Question(text: "Buck size"),
         Question(text: "Date & Time"),
+        Question(text: "Select Camera Location"),
         // Add more questions as needed
     ]
 
@@ -269,17 +703,20 @@ struct PopupView: View {
 
             VStack(spacing: 20) {
                 HStack {
-                    Button(action: {
-                        withAnimation {
-                            showPopup.toggle()
+                    if currentQuestionIndex > 0 {
+                        Button(action: {
+                            withAnimation {
+                                currentQuestionIndex -= 1
+                            }
+                        }) {
+                            Image(systemName: "chevron.left.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.blue)
                         }
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.gray)
+                        .padding([.top, .leading])
                     }
-                    .padding([.top, .leading])
+
                     Spacer()
 
                     if currentQuestionIndex < questions.count - 1 {
@@ -439,6 +876,37 @@ struct PopupView: View {
                         .cornerRadius(10)
                         .shadow(radius: 5)
                         .padding(.horizontal)
+                } else if currentQuestionIndex == 5 {
+                    // Map view for selecting camera location
+                    VStack {
+                        Text("Select Camera Location")
+                            .font(.headline)
+                            .padding()
+                        
+                        MapView2(
+                            region: $region,
+                            pins: $pins,
+                            showingCameraNamePopup: $showingCameraNamePopup,
+                            showingCameraInfoPopup: $showingCameraInfoPopup,
+                            cameraName: $cameraName,
+                            lastPin: $lastPin,
+                            mapType: $mapType,
+                            selectedCameraInfo: $selectedCameraInfo,
+                            onCameraSelected: { camera in
+                                self.trailCamera = camera.name
+                                self.selectedCameraFeedback = "Selected Camera: \(camera.name)"
+                            }
+                        )
+                        .frame(height: 300)
+
+                        if !selectedCameraFeedback.isEmpty {
+                            Text(selectedCameraFeedback)
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                                .padding(.top, 10)
+                        }
+                    }
+                    .padding(.horizontal)
                 } else {
                     TextField("Your answer here...", text: Binding(
                         get: {
@@ -491,30 +959,15 @@ struct PopupView: View {
             .onAppear {
                 loadTrailCameras()
             }
-        }
-    }
-
-    private func printSelections() {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: selectedDate)
-        let minute = calendar.component(.minute, from: selectedDate)
-        let date = calendar.startOfDay(for: selectedDate)
-        let dateTime = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: date)!
-        let stringDate = formatDateToString(date: dateTime)
-        print("dateTime: \(dateTime)")
-        print("stringDate: \(stringDate)")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        let formattedDate = dateFormatter.string(from: dateTime)
-
-        answers[0] = selectedImage != nil ? "Image Selected" : "No Image"
-        answers[1] = animalTypes[selectedAnimalTypeIndex].description
-        answers[3] = animalTypes[selectedAnimalTypeIndex].description == "Buck" ? "\(counter)" : ""
-        answers[4] = formattedDate
-
-        for (index, answer) in answers.enumerated() {
-            print("Question \(index + 1): \(answer)")
+            .gesture(
+                DragGesture().onEnded { value in
+                    if value.translation.height > 100 {
+                        withAnimation {
+                            showPopup = false
+                        }
+                    }
+                }
+            )
         }
     }
 
@@ -529,6 +982,25 @@ struct PopupView: View {
             print("Camera not found")
             return
         }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        let formattedDate = dateFormatter.string(from: dateTime)
+        answers[0] = selectedImage != nil ? "Image Selected" : "No Image"
+        answers[1] = animalTypes[selectedAnimalTypeIndex].description
+        answers[3] = animalTypes[selectedAnimalTypeIndex].description == "Buck" ? "\(counter)" : ""
+        print("Hello")
+        print(animalTypes[selectedAnimalTypeIndex].description)
+        if animalTypes[selectedAnimalTypeIndex].description == "Buck" {
+            buckSize = String(counter)
+        }
+        print(buckSize)
+        answers[4] = formattedDate
+
+        for (index, answer) in answers.enumerated() {
+            print("Question \(index + 1): \(answer)")
+        }
 
         fetchWeatherData(latitude: selectedCamera.latitude, longitude: selectedCamera.longitude, dateTime: dateTime) { weatherData in
             DispatchQueue.main.async {
@@ -537,11 +1009,24 @@ struct PopupView: View {
                     if let firstWeatherDetail = weatherData.data.first {
                         print("Weather Data for \(self.formattedDate(self.selectedDate)) at \(self.formattedTime(self.selectedDate)):")
                         print("Temperature: \(firstWeatherDetail.temp)°F")
+                        temperature = String(firstWeatherDetail.temp)
                         print("Feels Like: \(firstWeatherDetail.feelsLike)°F")
+                        feelsLike = String(firstWeatherDetail.feelsLike)
                         print("Wind Speed: \(firstWeatherDetail.windSpeed) mph")
+                        wind = String(firstWeatherDetail.windSpeed)
                         print("Wind Direction: \(windDirection(degrees: firstWeatherDetail.windDeg))")
+                        windDirection = firstWeatherDetail.windDeg
                         print("Precipitation: \(firstWeatherDetail.precipitation ?? 0) mm")
+                        precipitation = String(firstWeatherDetail.precipitation ?? 0)
                         print("Weather Description: \(firstWeatherDetail.weather.first?.description ?? "N/A")")
+                        weatherDescription = firstWeatherDetail.weather.first?.description ?? "N/A"
+                        // Convert Unix timestamps to formatted time
+                        let sunriseTime = formattedTime(from: firstWeatherDetail.sunrise)
+                        let sunsetTime = formattedTime(from: firstWeatherDetail.sunset)
+                        print("Sunrise: \(sunriseTime)")
+                        print("Sunset: \(sunsetTime)")
+                        sunrise = sunriseTime
+                        sunset = sunsetTime
                     } else {
                         print("No weather details available")
                     }
@@ -556,6 +1041,7 @@ struct PopupView: View {
                         case .success(let moonPhase):
                             // Process and combine weather data with moon phase data
                             print("Moon Phase: \(moonPhase)")
+                            currentMoonPhase = String(moonPhase)
                         case .failure(let error):
                             print("Failed to fetch moon phase data: \(error.localizedDescription)")
                         }
@@ -566,9 +1052,24 @@ struct PopupView: View {
                         imageDataObject.imageName = answers[2]
                         imageDataObject.imageData = imageData
                         imageDataObject.animalType = animalTypes[selectedAnimalTypeIndex].description
+                        if animalTypes[selectedAnimalTypeIndex].description == "Buck"
+                        {
+                            print("We in here")
+                            imageDataObject.buckSize = buckSize
+                        }
+                        print(buckSize)
                         imageDataObject.date = self.selectedDate
                         imageDataObject.time = self.selectedDate
-                        imageDataObject.trailCamera = "Slay"
+                        imageDataObject.trailCamera = trailCamera
+                        imageDataObject.temperature = temperature
+                        imageDataObject.feelsLike = feelsLike
+                        imageDataObject.precipitation = precipitation
+                        imageDataObject.wind = wind
+                        imageDataObject.windDirection = windDirection(degrees: windDirection)
+                        imageDataObject.sunrise = sunrise
+                        imageDataObject.sunset = sunset
+                        imageDataObject.weatherDescription = weatherDescription
+                        imageDataObject.moonPhase = currentMoonPhase
                         do {
                             try realm.write {
                                 realm.add(imageDataObject)
@@ -582,7 +1083,14 @@ struct PopupView: View {
             }
         }
     }
-
+    
+    func formattedTime(from unixTimestamp: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        return dateFormatter.string(from: date)
+    }
+    
     private func windDirection(degrees: Int) -> String {
         let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"]
         let index = Int((Double(degrees) / 22.5).rounded()) % 16
@@ -669,5 +1177,95 @@ struct Model3DView: UIViewRepresentable {
         for child in node.childNodes {
             scaleModel(node: child, scale: scale)
         }
+    }
+}
+
+struct InfoRow: View {
+    var icon: String
+    var iconColor: Color
+    var label: String
+    var value: String
+
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(iconColor)
+                .frame(width: 20, height: 20) // Added height to match the frame size
+            Text(label)
+                .frame(width: 80, alignment: .leading)
+                .font(.system(size: 12))
+            Spacer()
+            Text(value)
+                .font(.system(size: 12))
+                .fontWeight(.bold)
+                .frame(width: 80, alignment: .trailing)
+        }
+    }
+}
+
+struct CustomInfoRow: View {
+    var icon: String
+    var iconColor: Color
+    var label: String
+    var value: String
+
+    var body: some View {
+        HStack {
+            Image(icon)
+                .resizable()
+                .frame(width: 20, height: 20) // Set the custom image to the same size
+                .foregroundColor(iconColor)
+            Text(label)
+                .frame(width: 80, alignment: .leading)
+                .font(.system(size: 12))
+            Spacer()
+            Text(value)
+                .font(.system(size: 12))
+                .fontWeight(.bold)
+                .frame(width: 80, alignment: .trailing)
+        }
+    }
+}
+
+struct LineGraph: View {
+    var data: [Double]
+    var body: some View {
+        GeometryReader { geometry in
+            Path { path in
+                let width = geometry.size.width
+                let height = geometry.size.height
+                let stepX = width / CGFloat(data.count - 1)
+                let maxY = data.max() ?? 1
+                path.move(to: CGPoint(x: 0, y: height * (1 - CGFloat(data[0] / maxY))))
+                for i in 1..<data.count {
+                    let x = stepX * CGFloat(i)
+                    let y = height * (1 - CGFloat(data[i] / maxY))
+                    path.addLine(to: CGPoint(x: x, y: y))
+                }
+            }
+            .stroke(Color.orange, lineWidth: 2)
+        }
+        .frame(height: 100)
+    }
+}
+
+struct CardView<Content: View>: View {
+    var content: Content
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    var body: some View {
+        VStack {
+            content
+        }
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(10)
+        .shadow(radius: 5)
+    }
+}
+
+struct DashboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        DashboardView(imageDataStore: ImageDataStore())
     }
 }
