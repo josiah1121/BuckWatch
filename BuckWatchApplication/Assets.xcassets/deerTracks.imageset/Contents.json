@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "332-3325053_deer-tracks-clip-art-huellas-de-vaca-png Background Removed.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
